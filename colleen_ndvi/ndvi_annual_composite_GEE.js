@@ -74,7 +74,8 @@ var ndvi_reduced_l8 = ndviL8.max().clip(region)
 print('reduced ndvi', ndvi_reduced_l8.select('NDVI'));
 
 Map.addLayer(ndvi_reduced_l8.select('NDVI'), {}, 'ndvi reduced');
-
+/* In theory, this should work, but number of census tracts is too computationall intensive for GEE, so commented out.
+Refer to Python scripts for how the zonal statistics were calculated
 // Load Census tracts
 //var tracts = ee.FeatureCollection('users/gili4697/us_contiguous_census_tracts');
 var tracts = ee.FeatureCollection('users/gili4697/us_contiguous_census_tracts');
@@ -93,22 +94,14 @@ Export.table.toDrive({
   description: 'us_tracts_ndvi_2014',
   fileFormat: 'SHP'
 })
+*/
 
-// Export the image, specifying scale and region.
-/*Export.image.toDrive({
+// Export the images, specifying scale and region.
+Export.image.toDrive({
   image: ndvi_reduced.select('NDVI'),
   description: 'L72012NDVI',
   scale: 30,
   region: region.bounds(),
   maxPixels:1e11,
   skipEmptyTiles: true
-});*/
-// Export the image, specifying scale and region.
-/*Export.image.toDrive({
-  image: ndvi_reduced.select('NDVI'),
-  description: 'L72012NDVI',
-  scale: 30,
-  region: region.bounds(),
-  maxPixels:1e11,
-  skipEmptyTiles: true
-});*/
+});
