@@ -1,13 +1,14 @@
 import arcpy
 import glob,os
 import csv
-os.chdir("G:/My Drive/NDVI_2014")
+os.chdir("E:/NDVI_output/2012")
 from arcpy import env
 
-env.workspace="G:/My Drive/NDVI_2014"
+env.workspace="E:/NDVI_output/2012"
 MergedArray=[]
 
 for file_name in glob.glob("*.dbf"):
+    print(file_name)
     geoid=arcpy.ListFields(str(file_name))[1]
     count=arcpy.ListFields(str(file_name))[2]
     mean=arcpy.ListFields(str(file_name))[3]
@@ -38,7 +39,7 @@ for file_name in glob.glob("*.dbf"):
             MergedArray.append([str(id_val),cnt_val,ndvi_val])
 
 
-with open("G:/My Drive/NDVI_2014/result_2014.csv","wb") as f:
+with open("E:/NDVI_output/2012/result_2012.csv","wb") as f:
     writer=csv.writer(f)
     writer.writerow(['GEO_ID','COUNT','MEAN'])
     writer.writerows(MergedArray)
