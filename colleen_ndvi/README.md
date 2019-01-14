@@ -5,7 +5,7 @@ Steps:
 
 2) Run `convert_tif_img.py` to convert tif files to img files. This is a very time intensive task. Run in serial for one year, this will take 20 hours. I kicked off three separate jobs (one for each year) at the same time (total of 20 hours). In the future if this task needs to be shortened, multiprocessing can be implemented. Also, the reason we have to convert from .tif to .img is because step 3 does not work with tif files (some values result to nan after running arcpy's zonal statistics as table function).
 
-3) Run `zonal_stats.py` to calculate the mean and pixel count for each census tract for each img file. This avoids having to mosaic all img files together and then runzonal statistics on a huge mosaic, which would be too computationally intensive. This step takes a little over 2 hours for each year.
+3) Run `zonal_stats.py` to calculate the mean and pixel count for each census tract for each img file. This avoids having to mosaic all img files together and then run zonal statistics on a huge mosaic, which would be too computationally intensive. This step takes a little over 2 hours for each year.
 
 4) Run `merge_dbf.py` to get the final output csv file for each year. This step solves the issue where duplicate zonal statistics are calculated for census tracts that overlap two or more img tiles. The mathematical algorithm used in this script to calculate the mean NDVI of those census tracts that share boundary with multiple tiles is as follows:
 
