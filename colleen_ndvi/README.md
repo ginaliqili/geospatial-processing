@@ -9,4 +9,4 @@ Steps:
 
 4) Run `merge_dbf.py` to get the final output csv file for each year. This step solves the issue where duplicate zonal statistics are calculated for census tracts that overlap two or more image tiles. The mathematical algorithm used in this script to calculate the mean NDVI of those census tracts that share boundary with multiple tiles of an NDVI img file is as follows:
 
-Mean NDVI = (NDVI1*Area1+NDVI2*Area2+...+NDVIn*AreaN)/(Area1+Area2+..._AreaN)
+Mean NDVI = (NDVI<sub>1</sub> * Area<sub>1</sub> + NDVI<sub>2</sub> * Area<sub>2</sub> + ... + NDVI<sub>n</sub> * Area<sub>n</sub>) / (Area<sub>1</sub> + Area<sub>2</sub> + ... + Area<sub>n</sub>)
