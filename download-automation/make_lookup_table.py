@@ -23,7 +23,7 @@ if __name__ == "__main__":
     # create gdf for tiles
     filenames = []
     bboxes = []
-    for filename in glob.glob(args.ndvi_tif_directory + "*"):
+    for filename in glob.glob(args.ndvi_tif_directory + "*.tif"):
         filenames.append(filename)
         data = gdal.Open(filename, GA_ReadOnly)
         geoTransform = data.GetGeoTransform()
@@ -40,8 +40,9 @@ if __name__ == "__main__":
         'bbox': bboxes
     })
     bbox_gdf = gpd.GeoDataFrame(bbox_df, geometry='bbox')
-    #gdf.to_file('bboxes.shp', driver='ESRI Shapefile')
+    print(bbox_gdf.to_file('bboxes_2014.shp', driver='ESRI Shapefile'))
 
+    '''
     # load in census tracts as gdf
     census_tracts_gdf = gpd.read_file(args.census_tracts_shp, driver = 'ESRI Shapefile', header=True)
     #census_tracts_gdf = census_tracts_gdf.head(2000)
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     #IPython.embed()
     #tract_stats_df = zonal_stats_df.groupby('geo_id')['mean', 'count'].apply(list).to_frame()
     
-
+    '''
 
     
     
